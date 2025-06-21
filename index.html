@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USA All News - Latest National Headlines</title>
+    <style>
+        /* Main Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #d2232a;
+        }
+        
+        .date-display {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 20px 0;
+            display: block;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #d2232a;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://via.placeholder.com/1200x500') center/cover no-repeat;
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 40px;
+            color: white;
+        }
+        
+        .hero-content {
+            padding: 40px;
+            max-width: 700px;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .read-more {
+            display: inline-block;
+            background-color: #d2232a;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .read-more:hover {
+            background-color: #b11c22;
+        }
+        
+        /* News Grid */
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            color: #222;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .news-img {
+            height: 200px;
+            background: #eee;
+            overflow: hidden;
+        }
+        
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .news-card:hover .news-img img {
+            transform: scale(1.05);
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-category {
+            display: inline-block;
+            background-color: #f0f0f0;
+            color: #d2232a;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .news-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .news-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        /* Featured Section */
+        .featured-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .main-featured {
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .main-featured-img {
+            height: 400px;
+            background: #eee;
+            overflow: hidden;
+        }
+        
+        .main-featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .main-featured-content {
+            padding: 30px;
+        }
+        
+        .main-featured-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .main-featured-excerpt {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .sidebar-featured {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-card {
+            background: white;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+        }
+        
+        .sidebar-img {
+            width: 100px;
+            height: 100px;
+            background: #eee;
+            flex-shrink: 0;
+        }
+        
+        .sidebar-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .sidebar-content {
+            padding: 15px;
+        }
+        
+        .sidebar-title {
+            font-size: 16px;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        /* Politics Section */
+        .politics-section {
+            margin-bottom: 50px;
+        }
+        
+        /* Business Section */
+        .business-section {
+            margin-bottom: 50px;
+        }
+        
+        /* Technology Section */
+        .technology-section {
+            margin-bottom: 50px;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background-color: #f9f9f9;
+            padding: 50px 0;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #666;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+        
+        .newsletter-form button {
+            background-color: #d2232a;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #b11c22;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .featured-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero {
+                height: 400px;
+            }
+            
+            .hero-content {
+                padding: 30px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 4px;
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero {
+                height: 300px;
+            }
+            
+            .hero h1 {
+                font-size: 26px;
+            }
+            
+            .main-featured-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">USA All News</div>
+                <div class="date-display">Saturday, June 21, 2025</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Politics</a></li>
+                    <li><a href="#">Business</a></li>
+                    <li><a href="#">Technology</a></li>
+                    <li><a href="#">Health</a></li>
+                    <li><a href="#">Entertainment</a></li>
+                    <li><a href="#">Sports</a></li>
+                    <li><a href="#">Science</a></li>
+                    <li><a href="#">Opinion</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Breaking: Major Political Shift Expected After Latest Election Results</h1>
+            <p>The latest polls show a significant change in voter sentiment across key battleground states that could reshape the political landscape for years to come.</p>
+            <a href="#" class="read-more">Read Full Story</a>
+        </div>
+    </section>
+    
+    <main class="container">
+        <!-- Breaking News Section -->
+        <section class="breaking-section">
+            <h2 class="section-title">Breaking News</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">Politics</span>
+                        <h3 class="news-title">Senate Passes Historic Infrastructure Bill After Months of Negotiations</h3>
+                        <p class="news-excerpt">The $1.2 trillion package includes funding for roads, bridges, broadband expansion and clean energy initiatives.</p>
+                        <div class="news-meta">
+                            <span>By John Smith</span>
+                            <span>2 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">Business</span>
+                        <h3 class="news-title">Stock Markets Reach Record Highs Amid Positive Economic Indicators</h3>
+                        <p class="news-excerpt">The Dow Jones Industrial Average closed above 40,000 for the first time as investor confidence grows.</p>
+                        <div class="news-meta">
+                            <span>By Sarah Johnson</span>
+                            <span>4 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-category">Technology</span>
+                        <h3 class="news-title">Apple Unveils Revolutionary AI Features in Latest Operating System</h3>
+                        <p class="news-excerpt">The new AI assistant can anticipate user needs and automate complex tasks across devices.</p>
+                        <div class="news-meta">
+                            <span>By Michael Chen</span>
+                            <span>6 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Featured Section -->
+        <section class="featured-section">
+            <article class="main-featured">
+                <div class="main-featured-img">
+                    <img src="https://via.placeholder.com/800x400" alt="Featured news">
+                </div>
+                <div class="main-featured-content">
+                    <span class="news-category">National</span>
+                    <h2 class="main-featured-title">Climate Change Report Warns of Accelerating Impacts Across United States</h2>
+                    <p class="main-featured-excerpt">A new federal assessment finds that every region of the country is experiencing worsening effects of climate change, from more intense wildfires in the West to increased flooding in the Midwest and coastal erosion along the Atlantic seaboard.</p>
+                    <a href="#" class="read-more">Continue Reading</a>
+                </div>
+            </article>
+            
+            <aside class="sidebar-featured">
+                <article class="sidebar-card">
+                    <div class="sidebar-img">
+                        <img src="https://via.placeholder.com/100x100" alt="Sidebar news">
+                    </div>
+                    <div class="sidebar-content">
+                        <h3 class="sidebar-title">Supreme Court to Hear Landmark Case on Digital Privacy Rights</h3>
+                        <div class="news-meta">
+                            <span>1 hour ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="sidebar-card">
+                    <div class="sidebar-img">
+                        <img src="https://via.placeholder.com/100x100" alt="Sidebar news">
+                    </div>
+                    <div class="sidebar-content">
+                        <h3 class="sidebar-title">Major Cities Report Significant Drop in Violent Crime Rates</h3>
+                        <div class="news-meta">
+                            <span>3 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="sidebar-card">
+                    <div class="sidebar-img">
+                        <img src="https://via.placeholder.com/100x100" alt="Sidebar news">
+                    </div>
+                    <div class="sidebar-content">
+                        <h3 class="sidebar-title">NASA Announces Crew for First Manned Mission to Mars</h3>
+                        <div class="news-meta">
+                            <span>5 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="sidebar-card">
+                    <div class="sidebar-img">
+                        <img src="https://via.placeholder.com/100x100" alt="Sidebar news">
+                    </div>
+                    <div class="sidebar-content">
+                        <h3 class="sidebar-title">New Education Initiative Aims to Close STEM Gender Gap</h3>
+                        <div class="news-meta">
+                            <span>7 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+            </aside>
+        </section>
+        
+        <!-- Politics Section -->
+        <section class="politics-section">
+            <h2 class="section-title">Politics</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">President Announces New Cabinet Appointments Following Resignations</h3>
+                        <p class="news-excerpt">Three key cabinet positions will see new leadership as the administration enters its second term.</p>
+                        <div class="news-meta">
+                            <span>By Robert Williams</span>
+                            <span>8 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">Bipartisan Group Proposes Electoral Reform Legislation</h3>
+                        <p class="news-excerpt">The bill would establish national standards for voting access while maintaining state control over elections.</p>
+                        <div class="news-meta">
+                            <span>By Elizabeth Taylor</span>
+                            <span>10 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">State Department Issues New Travel Advisory Amid Global Tensions</h3>
+                        <p class="news-excerpt">Americans are warned against travel to several regions as diplomatic relations remain strained.</p>
+                        <div class="news-meta">
+                            <span>By David Kim</span>
+                            <span>12 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Business Section -->
+        <section class="business-section">
+            <h2 class="section-title">Business & Economy</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">Federal Reserve Signals Possible Rate Cuts as Inflation Cools</h3>
+                        <p class="news-excerpt">Central bank officials indicate they may begin lowering interest rates later this year if economic trends continue.</p>
+                        <div class="news-meta">
+                            <span>By Patricia Lopez</span>
+                            <span>9 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">Major Tech Merger Creates New Industry Giant</h3>
+                        <p class="news-excerpt">The $85 billion deal combines two leading companies in the cloud computing space.</p>
+                        <div class="news-meta">
+                            <span>By James Wilson</span>
+                            <span>11 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">Automakers Report Record Electric Vehicle Sales</h3>
+                        <p class="news-excerpt">EVs now account for nearly 30% of all new vehicle purchases as charging infrastructure expands.</p>
+                        <div class="news-meta">
+                            <span>By Rachel Nguyen</span>
+                            <span>13 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Technology Section -->
+        <section class="technology-section">
+            <h2 class="section-title">Technology & Science</h2>
+            <div class="news-grid">
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">Breakthrough in Quantum Computing Announced by Researchers</h3>
+                        <p class="news-excerpt">Scientists have achieved quantum supremacy with a new processor that solves problems impossible for classical computers.</p>
+                        <div class="news-meta">
+                            <span>By Thomas Reed</span>
+                            <span>7 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">Social Media Platforms Face New Regulations Under Congressional Bill</h3>
+                        <p class="news-excerpt">The proposed legislation would require greater transparency about algorithms and content moderation practices.</p>
+                        <div class="news-meta">
+                            <span>By Samantha Lee</span>
+                            <span>9 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="news-card">
+                    <div class="news-img">
+                        <img src="https://via.placeholder.com/400x200" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <h3 class="news-title">New Study Reveals Health Benefits of Advanced Air Purification Systems</h3>
+                        <p class="news-excerpt">Research shows significant improvements in respiratory health and cognitive function in buildings with the technology.</p>
+                        <div class="news-meta">
+                            <span>By Daniel Park</span>
+                            <span>11 hours ago</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <h2>Stay Updated with USA All News</h2>
+                <p>Subscribe to our daily newsletter for the most important stories delivered straight to your inbox every morning.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Politics</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Health</a></li>
+                        <li><a href="#">Entertainment</a></li>
+                        <li><a href="#">Sports</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Ethics Policy</a></li>
+                        <li><a href="#">Corrections</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Regional</h3>
+                    <ul>
+                        <li><a href="#">Northeast</a></li>
+                        <li><a href="#">Southeast</a></li>
+                        <li><a href="#">Midwest</a></li>
+                        <li><a href="#">Southwest</a></li>
+                        <li><a href="#">West</a></li>
+                        <li><a href="#">International</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Connect</h3>
+                    <ul>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">YouTube</a></li>
+                        <li><a href="#">RSS Feeds</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 USA All News. All rights reserved. | Terms of Service | Privacy Policy | Cookie Policy</p>
+            </div>
+        </div>
+    </footer>
+</body>
+  </html>
